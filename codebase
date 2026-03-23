@@ -1,0 +1,74 @@
+# =============================
+# RWA REAL ESTATE AI + BLOCKCHAIN PROJECT
+# End-to-End GitHub Starter Code
+# =============================
+
+# Project Structure:
+# rwa-real-estate/
+# ├── backend/
+# │   ├── main.py
+# │   ├── model.py
+# │   ├── fraud.py
+# │   └── database.py
+# ├── blockchain/
+# │   └── PropertyToken.sol
+# ├── data/
+# │   └── sample_data.csv
+# ├── frontend/
+# │   └── (React App Placeholder)
+# └── requirements.txt
+
+# =============================
+# requirements.txt
+# =============================
+fastapi
+uvicorn
+pandas
+scikit-learn
+numpy
+
+# =============================
+# backend/database.py
+# =============================
+import sqlite3
+
+def get_connection():
+    return sqlite3.connect("rwa.db")
+
+# =============================
+# backend/model.py (Price Prediction)
+# =============================
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+class PriceModel:
+    def __init__(self):
+        self.model = LinearRegression()
+
+    def train(self, path="data/sample_data.csv"):
+        df = pd.read_csv(path)
+        X = df[["size", "location_score", "amenities_score"]]
+        y = df["price"]
+        self.model.fit(X, y)
+
+    def predict(self, size, location_score, amenities_score):
+        return self.model.predict([[size, location_score, amenities_score]])[0]
+
+# =============================
+# backend/fraud.py (Fraud Detection)
+# =============================
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+class FraudModel:
+    def __init__(self):
+        self.model = RandomForestClassifier()
+
+    def train(self, path="data/sample_data.csv"):
+        df = pd.read_csv(path)
+        X = df[["price", "size"]]
+        y = df["fraud"]
+        self.model.fit(X, y)
+
+    def predict(self, price, size):
+print("Project Ready 🚀")
