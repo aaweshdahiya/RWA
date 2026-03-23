@@ -1,0 +1,1 @@
+“I built an end-to-end RWA real estate platform combining AI and blockchain, where properties are tokenized and evaluated using ML models for pricing and fraud detection, with a scalable API architecture.”
